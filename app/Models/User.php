@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'tipo', // 'organizador', 'inscrito', 'administrador'
+
     ];
 
     /**
@@ -45,4 +47,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function inscricoes()
+    {
+        return $this->hasMany(\App\Models\Inscricao::class);
+    }
+
+    public function eventosOrganizados()
+    {
+        return $this->hasMany(\App\Models\Evento::class, 'organizador_id');
+    }
+
 }

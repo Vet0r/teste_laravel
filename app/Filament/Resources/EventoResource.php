@@ -26,7 +26,7 @@ class EventoResource extends Resource
             ->schema([
                 Forms\Components\Select::make('organizador_id')
                     ->label('Organizador')
-                    ->relationship('organizador', 'nome')
+                    ->relationship('organizador', 'name')
                     ->required()
                     ->searchable(),
 
@@ -69,7 +69,7 @@ class EventoResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('organizador.nome')
+                Tables\Columns\TextColumn::make('organizador.name')
                     ->label('Organizador')
                     ->sortable()
                     ->searchable(),
@@ -91,7 +91,7 @@ class EventoResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('organizador')
-                    ->relationship('organizador', 'nome')
+                    ->relationship('organizador', 'name')
                     ->label('Filtrar por Organizador'),
             ])
             ->actions([

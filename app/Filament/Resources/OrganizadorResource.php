@@ -25,7 +25,7 @@ class OrganizadorResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nome')
+                Forms\Components\TextInput::make('name')
                     ->label('Nome')
                     ->required()
                     ->maxLength(255),
@@ -42,7 +42,7 @@ class OrganizadorResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nome')
+                Tables\Columns\TextColumn::make('name')
                     ->label('Nome')
                     ->sortable()
                     ->searchable(),

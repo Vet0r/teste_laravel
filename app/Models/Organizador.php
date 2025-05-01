@@ -9,12 +9,13 @@ class Organizador extends Model
 {
     public function eventos()
     {
-        return $this->hasMany(Evento::class);
+        return $this->hasMany(\App\Models\Evento::class);
     }
+
     use HasFactory;
 
     protected $fillable = [
-        'nome',
+        'name',
         'email',
     ];
 }

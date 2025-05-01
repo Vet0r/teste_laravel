@@ -10,7 +10,12 @@ class Evento extends Model
     use HasFactory;
     public function organizador()
     {
-        return $this->belongsTo(Organizador::class);
+        return $this->belongsTo(\App\Models\User::class, 'organizador_id');
+    }
+
+    public function inscricoes()
+    {
+        return $this->hasMany(\App\Models\Inscricao::class);
     }
     protected $fillable = [
         'titulo',
