@@ -5,6 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\EventoResource\Pages;
 use App\Filament\Resources\EventoResource\RelationManagers;
 use App\Models\Evento;
+use App\Models\User;
+
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -26,9 +28,9 @@ class EventoResource extends Resource
             ->schema([
                 Forms\Components\Select::make('organizador_id')
                     ->label('Organizador')
-                    ->relationship('organizador', 'name')
-                    ->required()
-                    ->searchable(),
+                    ->options(User::where('tipo', 'organizador')->pluck('name', 'id'))
+                    ->searchable()
+                    ->required(),
 
                 Forms\Components\TextInput::make('titulo')
                     ->label('Título')
