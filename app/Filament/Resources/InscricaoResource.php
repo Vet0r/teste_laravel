@@ -23,7 +23,20 @@ class InscricaoResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Select::make('user_id')
+                    ->relationship('usuario', 'name')
+                    ->required(),
+                Forms\Components\Select::make('evento_id')
+                    ->relationship('evento', 'titulo')
+                    ->required(),
+                Forms\Components\DatePicker::make('data_inscricao')->required(),
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'pendente' => 'Pendente',
+                        'confirmado' => 'Confirmado',
+                        'cancelado' => 'Cancelado',
+                    ])
+                    ->required(),
             ]);
     }
 
@@ -31,7 +44,10 @@ class InscricaoResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('usuario.name')->label('Inscrito'),
+                Tables\Columns\TextColumn::make('evento.titulo')->label('Evento'),
+                Tables\Columns\TextColumn::make('data_inscricao')->date(),
+                Tables\Columns\TextColumn::make('status'),
             ])
             ->filters([
                 //

@@ -23,7 +23,23 @@ class PagamentoResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Select::make('inscricao_id')
+                    ->relationship('inscricao', 'id')
+                    ->required(),
+                Forms\Components\TextInput::make('valor')->numeric()->required(),
+                Forms\Components\Select::make('metodo_pagamento')
+                    ->options([
+                        'cartao' => 'Cartão',
+                        'pix' => 'Pix',
+                        'boleto' => 'Boleto',
+                    ])->required(),
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'pago' => 'Pago',
+                        'pendente' => 'Pendente',
+                        'reembolsado' => 'Reembolsado',
+                    ])->required(),
+                Forms\Components\DatePicker::make('data')->required(),
             ]);
     }
 
@@ -31,7 +47,11 @@ class PagamentoResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('inscricao.id')->label('Inscrição'),
+                Tables\Columns\TextColumn::make('valor')->money('BRL'),
+                Tables\Columns\TextColumn::make('metodo_pagamento'),
+                Tables\Columns\TextColumn::make('status'),
+                Tables\Columns\TextColumn::make('data')->date(),
             ])
             ->filters([
                 //
