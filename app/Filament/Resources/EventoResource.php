@@ -34,10 +34,9 @@ class EventoResource extends Resource
                     ->searchable()
                     ->required(),
                 FileUpload::make('imagem')
-                    ->directory('eventos')
+                    ->directory('storage/eventos')
                     ->image()
                     ->imagePreviewHeight('200')
-                    ->maxSize(20480)
                     ->required(),
 
                 Forms\Components\TextInput::make('titulo')

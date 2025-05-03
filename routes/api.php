@@ -1,8 +1,39 @@
 <?php
 use App\Http\Controllers\Api\EventoController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\InscricaoController;
+use App\Http\Controllers\Api\PagamentoController;
+use App\Http\Controllers\Api\UserController;
 
-Route::get('/eventos', [EventoController::class, 'index']);
-Route::get('/eventos/{id}', [EventoController::class, 'show']);
-Route::post('/eventos', [EventoController::class, 'store']);
-Route::put('/eventos/{id}', [EventoController::class, 'update']);
-Route::delete('/eventos/{id}', [EventoController::class, 'destroy']);
+Route::prefix('v1')->group(function () {
+
+    Route::get('/eventos', [EventoController::class, 'index']);
+    Route::get('/eventos/{id}', [EventoController::class, 'show']);
+
+    Route::get('/inscricoes', [InscricaoController::class, 'index']);
+    Route::get('/inscricoes/{id}', [InscricaoController::class, 'show']);
+
+    Route::get('/pagamentos', [PagamentoController::class, 'index']);
+    Route::get('/pagamentos/{id}', [PagamentoController::class, 'show']);
+
+    Route::get('/usuarios', [UserController::class, 'index']);
+    Route::get('/usuarios/{id}', [UserController::class, 'show']);
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/eventos', [EventoController::class, 'store']);
+        Route::put('/eventos/{id}', [EventoController::class, 'update']);
+        Route::delete('/eventos/{id}', [EventoController::class, 'destroy']);
+
+        Route::post('/inscricoes', [InscricaoController::class, 'store']);
+        Route::put('/inscricoes/{id}', [InscricaoController::class, 'update']);
+        Route::delete('/inscricoes/{id}', [InscricaoController::class, 'destroy']);
+
+        Route::post('/pagamentos', [PagamentoController::class, 'store']);
+        Route::put('/pagamentos/{id}', [PagamentoController::class, 'update']);
+        Route::delete('/pagamentos/{id}', [PagamentoController::class, 'destroy']);
+
+        Route::post('/usuarios', [UserController::class, 'store']);
+        Route::put('/usuarios/{id}', [UserController::class, 'update']);
+        Route::delete('/usuarios/{id}', [UserController::class, 'destroy']);
+    });
+});
