@@ -25,6 +25,7 @@ class Evento extends Model
         'capacidade',
         'preco',
         'organizador_id',
+        'imagem',
     ];
 
 }

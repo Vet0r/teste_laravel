@@ -20,6 +20,8 @@ return new class extends Migration {
             $table->integer('capacidade');
             $table->decimal('preco', 8, 2);
             $table->timestamps();
+            $table->string('imagem');
+
         });
 
     }

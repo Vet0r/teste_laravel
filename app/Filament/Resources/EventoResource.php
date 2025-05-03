@@ -5,6 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\EventoResource\Pages;
 use App\Filament\Resources\EventoResource\RelationManagers;
 use App\Models\Evento;
+use Filament\Forms\Components\FileUpload;
+
 use App\Models\User;
 
 use Filament\Forms;
@@ -30,6 +32,12 @@ class EventoResource extends Resource
                     ->label('Organizador')
                     ->options(User::where('tipo', 'organizador')->pluck('name', 'id'))
                     ->searchable()
+                    ->required(),
+                FileUpload::make('imagem')
+                    ->directory('eventos')
+                    ->image()
+                    ->imagePreviewHeight('200')
+                    ->maxSize(20480)
                     ->required(),
 
                 Forms\Components\TextInput::make('titulo')
