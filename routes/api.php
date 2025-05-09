@@ -4,8 +4,31 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\InscricaoController;
 use App\Http\Controllers\Api\PagamentoController;
 use App\Http\Controllers\Api\UserController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\PersonalAccessToken;
 
 Route::prefix('v1')->group(function () {
+
+
+
+    Route::get('/validate-token', function (Request $request) {
+        $authorization = $request->header('Authorization');
+        if (!$authorization || !str_starts_with($authorization, 'Bearer ')) {
+            return response()->json(['valid' => false, 'error' => 'Token ausente'], 401);
+        }
+        $token = substr($authorization, 7);
+        $accessToken = PersonalAccessToken::findToken($token);
+        if (!$accessToken) {
+            return response()->json(['valid' => false, 'error' => 'Token inválido'], 401);
+        }
+        $user = $accessToken->tokenable;
+        Auth::login($user);
+        return response()->json([
+            'valid' => true,
+            'user' => $user
+        ]);
+    });
 
     Route::post('/register', [UserController::class, 'register']);
     Route::post('/login', [UserController::class, 'login']);
