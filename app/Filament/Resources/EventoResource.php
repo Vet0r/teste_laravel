@@ -34,7 +34,9 @@ class EventoResource extends Resource
                     ->searchable()
                     ->required(),
                 FileUpload::make('imagem')
-                    ->directory('storage/eventos')
+                    ->disk('s3')
+                    ->directory('eventos')
+                    ->visibility('publico')
                     ->image()
                     ->imagePreviewHeight('200')
                     ->required(),
@@ -77,7 +79,6 @@ class EventoResource extends Resource
                     ->label('Título')
                     ->searchable()
                     ->sortable(),
-
                 Tables\Columns\TextColumn::make('organizador.name')
                     ->label('Organizador')
                     ->sortable()
