@@ -25,6 +25,7 @@ class EventoController extends Controller
             'titulo' => 'required|string',
             'descricao' => 'required|string',
             'data' => 'required|date',
+            'categoria' => 'required|in:Tecnologia,Música,Artes,Esporte,Comida,Negócios',
             'localizacao' => 'required|string',
             'organizador_id' => 'required|integer|exists:users,id',
             'capacidade' => 'required|integer',

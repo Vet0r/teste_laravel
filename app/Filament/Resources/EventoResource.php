@@ -41,6 +41,18 @@ class EventoResource extends Resource
                     ->imagePreviewHeight('200')
                     ->required(),
 
+                Forms\Components\Select::make('categoria')
+                    ->label('Categoria')
+                    ->options([
+                        'Tecnologia' => 'Tecnologia',
+                        'Música' => 'Música',
+                        'Artes' => 'Artes',
+                        'Esporte' => 'Esporte',
+                        'Comida' => 'Comida',
+                        'Negócios' => 'Negócios',
+                    ])
+                    ->required(),
+
                 Forms\Components\TextInput::make('titulo')
                     ->label('Título')
                     ->required()
@@ -79,6 +91,7 @@ class EventoResource extends Resource
                     ->label('Título')
                     ->searchable()
                     ->sortable(),
+
                 Tables\Columns\TextColumn::make('organizador.name')
                     ->label('Organizador')
                     ->sortable()

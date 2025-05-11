@@ -8,9 +8,13 @@ use Illuminate\Http\Request;
 
 class InscricaoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Inscricao::all();
+        $user = $request->user();
+        if ($user->tipo === 'administrador') {
+            return Inscricao::all();
+        }
+        return Inscricao::where('user_id', $user->id)->get();
     }
 
     public function show($id)

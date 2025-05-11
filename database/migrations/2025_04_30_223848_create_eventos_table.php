@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('titulo');
             $table->text('descricao');
             $table->date('data');
+            $table->string('categoria');
             $table->string('localizacao');
             $table->foreignId('organizador_id')->constrained('users')->onDelete('cascade');
             $table->integer('capacidade');

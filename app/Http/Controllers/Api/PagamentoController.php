@@ -8,9 +8,15 @@ use Illuminate\Http\Request;
 
 class PagamentoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Pagamento::all();
+        $user = $request->user();
+        if ($user->tipo === 'administrador') {
+            return Pagamento::all();
+        }
+        return Pagamento::whereHas('inscricao', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
     }
 
     public function show($id)

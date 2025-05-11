@@ -36,16 +36,16 @@ Route::prefix('v1')->group(function () {
     Route::get('/eventos', [EventoController::class, 'index']);
     Route::get('/eventos/{id}', [EventoController::class, 'show']);
 
-    Route::get('/inscricoes', [InscricaoController::class, 'index']);
-    Route::get('/inscricoes/{id}', [InscricaoController::class, 'show']);
-
-    Route::get('/pagamentos', [PagamentoController::class, 'index']);
-    Route::get('/pagamentos/{id}', [PagamentoController::class, 'show']);
-
     Route::get('/usuarios', [UserController::class, 'index']);
     Route::get('/usuarios/{id}', [UserController::class, 'show']);
 
     Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/inscricoes', [InscricaoController::class, 'index']);
+        Route::get('/inscricoes/{id}', [InscricaoController::class, 'show']);
+
+        Route::get('/pagamentos', [PagamentoController::class, 'index']);
+        Route::get('/pagamentos/{id}', [PagamentoController::class, 'show']);
+
         Route::post('/eventos', [EventoController::class, 'store']);
         Route::put('/eventos/{id}', [EventoController::class, 'update']);
         Route::delete('/eventos/{id}', [EventoController::class, 'destroy']);
