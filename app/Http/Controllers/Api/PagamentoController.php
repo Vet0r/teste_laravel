@@ -20,7 +20,9 @@ class PagamentoController extends Controller
 
     public function store(Request $request)
     {
+
         $validated = $request->validate([
+            'inscricao_id' => 'required|integer|exists:inscricaos,id',
             'valor' => 'required|numeric',
             'metodo_pagamento' => 'required|string',
             'status' => 'required|string',
@@ -28,6 +30,7 @@ class PagamentoController extends Controller
         ]);
 
         return Pagamento::create($validated);
+
     }
 
     public function update(Request $request, $id)
