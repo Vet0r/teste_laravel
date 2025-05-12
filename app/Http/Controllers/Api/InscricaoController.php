@@ -14,6 +14,11 @@ class InscricaoController extends Controller
         if ($user->tipo === 'administrador') {
             return Inscricao::all();
         }
+        if ($user->tipo === 'organizador') {
+            return Inscricao::whereHas('evento', function ($query) use ($user) {
+                $query->where('organizador_id', $user->id);
+            })->get();
+        }
         return Inscricao::where('user_id', $user->id)->get();
     }
 
