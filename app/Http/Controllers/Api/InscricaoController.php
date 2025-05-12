@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Inscricao;
+use App\Mail\CompraEfetuada;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 class InscricaoController extends Controller
@@ -35,7 +37,11 @@ class InscricaoController extends Controller
             'data_inscricao' => 'required|date',
             'status' => 'required|string',
         ]);
+        // $inscricao = Inscricao::create($validated);
+        // $user = \App\Models\User::find($validated['user_id']);
+        // Mail::to($user->email)->send(new CompraEfetuada($inscricao));
 
+        // return $inscricao;
         return Inscricao::create($validated);
     }
 
