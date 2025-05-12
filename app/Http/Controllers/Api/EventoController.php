@@ -9,8 +9,14 @@ use Illuminate\Http\Request;
 
 class EventoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+
+        if ($request->has('organizadorId')) {
+            $query = Evento::query();
+            $query->where('organizador_id', $request->input('organizadorId'));
+            return $query->get();
+        }
         return Evento::all();
     }
 
